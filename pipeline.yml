@@ -1,5 +1,4 @@
 name: Fullstack CI/CD Pipeline
-
 on:
   push:
     branches:
