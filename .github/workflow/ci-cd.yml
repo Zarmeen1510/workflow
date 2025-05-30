@@ -1,0 +1,32 @@
+name: Fullstack CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # --- FRONTEND BUILD ---
+      - name: Install Frontend Dependencies
+        working-directory: ./src/client
+        run: npm install
+
+      - name: Build React App
+        working-directory: ./src/client
+        run: npm run build
+
+      # --- BACKEND SETUP ---
+      - name: Install Backend Dependencies
+        working-directory: ./src/server
+        run: npm install
+
+      # --- DEPLOYMENT PLACEHOLDER ---
+      - name: Deploy to Server or Hosting
+        run: echo "Deploy step goes here (e.g., to Render, Heroku, etc.)"
