@@ -3,7 +3,9 @@ name: Fullstack CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - '**'
+      #- main
+      #- greenkeeper/babel-eslint-10.0.3
 
 jobs:
   build-and-deploy:
