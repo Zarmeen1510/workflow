@@ -1,4 +1,4 @@
-name: Fullstack CI/CD Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -13,7 +13,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # --- FRONTEND BUILD ---
       - name: Install Frontend Dependencies
         working-directory: ./src/client
         run: npm install
@@ -22,11 +21,9 @@ jobs:
         working-directory: ./src/client
         run: npm run build
 
-      # --- BACKEND SETUP ---
       - name: Install Backend Dependencies
         working-directory: ./src/server
         run: npm install
 
-      # --- DEPLOYMENT PLACEHOLDER ---
       - name: Deploy to Server or Hosting
-        run: echo "Deploy step goes here (e.g., to Render, Heroku, etc.)"
+        run: echo "Deploy step goes here"
