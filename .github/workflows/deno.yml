@@ -1,42 +1,31 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# This workflow will install Deno then run `deno lint` and `deno test`.
-# For more information see: https://github.com/denoland/setup-deno
-
-name: Deno
+name: Fullstack CI/CD Pipeline
 
 on:
   push:
-    branches: ["greenkeeper/babel-eslint-10.0.3"]
-  pull_request:
-    branches: ["greenkeeper/babel-eslint-10.0.3"]
-
-permissions:
-  contents: read
-
+    branches:
+      - main
 jobs:
-  test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup repo
-        uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Setup Deno
-        # uses: denoland/setup-deno@v1
-        uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31  # v1.1.2
-        with:
-          deno-version: v1.x
+      # --- FRONTEND BUILD ---
+      - name: Install Frontend Dependencies
+        working-directory: ./src/client
+        run: npm install
 
-      # Uncomment this step to verify the use of 'deno fmt' on each commit.
-      # - name: Verify formatting
-      #   run: deno fmt --check
+      - name: Build React App
+        working-directory: ./src/client
+        run: npm run build
 
-      - name: Run linter
-        run: deno lint
+      # --- BACKEND SETUP ---
+      - name: Install Backend Dependencies
+        working-directory: ./src/server
+        run: npm install
 
-      - name: Run tests
-        run: deno test -A
+      # --- DEPLOYMENT PLACEHOLDER ---
+      - name: Deploy to Server or Hosting
+        run: echo "Deploy step goes here (e.g., to Render, Heroku, etc.)"
